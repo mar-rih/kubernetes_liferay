@@ -41,7 +41,7 @@ kubectl create /helper_svc_k8s/helper_deploy.yml
 you can call shell command of this pods using following command
 
 ```
-kubectl exec -it deb-service-???? -- /sh
+kubectl exec -it deb-service-**** -- /sh
 ```
 After creating the your liferay flavor you can now run the image in EKS cluster as per following
 
@@ -56,11 +56,11 @@ kubectl create -f /pgs_db_k8s/postgres.yml
 ```
 notes: you can check if the previouse command is succeed to create the database by following commmand:
 ```
-kubectl exec -it  postgres-????? -- psql -h postgres -d postgresdb -U admin -c "\c"
+kubectl exec -it  postgres-****** -- psql -h postgres -d postgresdb -U admin -c "\c"
 ```
  you can test the existed databases using this PSQL command 
 ```
- kubectl exec -it postgres-5fd4cb7b6f-lbrq2 -- psql -h postgres -d postgresdb -U admin -c "\l"
+ kubectl exec -it postgres-****** -- psql -h postgres -d postgresdb -U admin -c "\l"
 ```
    password which is "1q2q2w3w"
 
