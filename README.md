@@ -73,6 +73,10 @@ kubectl exec -it  postgres-????? -- psql -h postgres -d postgresdb -U admin -c "
  kubectl create -f /lifferay_frontend_k8s/liferay_deployement.yml
 ```
 
+## Authors
+
+* **Marwan Alrihawi** - *DevOps Eng* - [mar-rih](https://github.com/mar-rih)
+
 
 
 
