@@ -1,0 +1,74 @@
+#Deployment
+#apiVersion: extensions/v1beta1
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: liferary-client10
+  namespace: liferay
+  labels:
+    app: liferay_client10
+spec:
+  selector:
+       matchLabels:
+         app: liferay_client10 
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: liferay_client10
+    spec:      
+      containers:
+      - env:
+        - name: DB_TYPE
+          value: POSTGRESQL
+        - name: DB_ENDPOINT
+          value: jdbc:postgresql://postgres.liferay:5432/medad_client_10
+        - name: DB_USER
+          value: admin
+        - name: DB_PASS
+          value: 1q2q2w3w
+        - name: COMPANY_NAME
+          value: MuellerInc_QA
+        - name: COMPANY_ID
+          value: mueller-qa.com
+        image: 558184000342.dkr.ecr.us-west-2.amazonaws.com/naseejmedad:client10
+        imagePullPolicy: Always
+        name: liferary-client10
+        command: [ "/bin/bash", "-ce", "/opt/liferay-portal-6.2-ce-ga6/tomcat-7.0.62/bin/catalina.sh run" ]
+        ports:
+        - containerPort: 8983
+        - containerPort: 8081
+        - containerPort: 2181
+        - containerPort: 2888
+        - containerPort: 3888
+        - containerPort: 8009
+        - containerPort: 8005
+        - containerPort: 4000
+        - containerPort: 7500
+        - containerPort: 8080
+        resources:
+          limits:
+            memory: 3Gi
+          requests:
+            memory: 1Gi
+        volumeMounts:
+        - mountPath: /opt/liferay-portal/data
+          name: liferay-data
+        - mountPath: /opt/liferay-portal/deploy
+          name: liferay-deploy
+        - mountPath: /opt/liferay-portal/tomcat-7.0.62/logs
+          name: liferay-logs
+      restartPolicy: Always
+      volumes:
+      - name: liferay-data
+        persistentVolumeClaim:
+          claimName: liferay-client10-data-claim
+      - name: liferay-deploy
+        persistentVolumeClaim:
+          claimName: liferay-client10-deploy-claim
+      - name: liferay-logs
+        persistentVolumeClaim:
+          claimName: liferay-client10-logs-claim      
+      imagePullSecrets:
+       - name:  aws-registry          

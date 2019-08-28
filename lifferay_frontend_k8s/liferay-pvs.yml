@@ -1,0 +1,50 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: liferay-client10-data
+  labels:
+    app: liferay-client10
+    type: local
+    assign-to: liferay-client10-data
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteMany
+  hostPath:
+    path: "/naseej_volumes/medad/client10/liferaydata"
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: liferay-client10-deploy
+  labels:
+    app: liferay-client10
+    type: local
+    assign-to: liferay-client10-deploy
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteMany
+  hostPath:
+    path: "/naseej_volumes/medad/client10/deploy"
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: liferay-client10-logs
+  labels:
+    app: liferay-client10
+    type: local
+    assign-to: liferay-client10-logs
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteMany
+  hostPath:
+    path: "/naseej_volumes/medad/client10/logs"    

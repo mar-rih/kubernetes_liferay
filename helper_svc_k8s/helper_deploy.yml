@@ -1,0 +1,46 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: deb-service
+  labels:
+    type: deploy
+    service: service
+spec:
+ selector:
+  matchLabels:
+   type: deploy
+   service: service
+ strategy:
+  type: Recreate
+ template:
+  metadata:
+   labels:
+    type: deploy
+    service: service    
+  spec:
+   containers:
+   - name: docker 
+     image: docker:17.11 
+     command: ["sleep"] 
+     args: ["100000"] 
+     volumeMounts: 
+      - mountPath: /var/run/docker.sock 
+        name: docker-socket
+   volumes: 
+    - name: docker-socket 
+      hostPath: 
+        path: /var/run/docker.sock 
+        type: Socket
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: dep-service
+    namespace: liferay  
+spec:
+    type: NodePort
+    ports:
+    - port: 28017
+    selector:
+        type: deploy
+        service: service

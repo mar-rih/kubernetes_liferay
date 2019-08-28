@@ -1,0 +1,40 @@
+#Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: liferary-client10
+  namespace: liferay
+  labels:
+    app: liferay_client10
+spec:
+  ports:
+  - name: "8983"
+    port: 8983
+    targetPort: 8983
+  - name: "8081"
+    port: 8081
+    targetPort: 8081
+  - name: "2181"
+    port: 2181
+    targetPort: 2181
+  - name: "2888"
+    port: 2888
+    targetPort: 2888
+  - name: "3888"
+    port: 3888
+    targetPort: 3888
+  - name: "4000"
+    port: 4000
+    targetPort: 4000
+  - name: "8009"
+    port: 8009
+    targetPort: 8009
+  - name: "7500"
+    port: 7500
+    targetPort: 7500
+  - name: "8005"
+    port: 8005 
+  - name: "8080"
+    port: 8080 
+  selector:
+    app: liferay_client10

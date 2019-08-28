@@ -1,0 +1,73 @@
+#Service for Postgres
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres
+  namespace: liferay  
+  labels:
+    app: postgres
+spec:
+  type: NodePort
+  ports:
+   - port: 5432
+  selector:
+    app: postgres
+---
+#Deployment for Postgres
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: postgres
+  namespace: liferay  
+  labels:
+    app: postgres
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      containers:
+      - env:
+        - name: DEBUG
+          value: "false"
+        - name: POSTGRES_USER
+          value: admin
+        - name: POSTGRES_PASSWORD
+          value: 1q2q2w3w
+        - name: POSTGRES_DB
+          value: postgresdb
+        - name: PG_TRUST_LOCALNET
+          value: "true"
+        image: postgres:9.5
+        name: postgres
+        ports:
+        - containerPort: 5432
+        resources: {}
+        volumeMounts:
+        - mountPath: /var/lib/postgresql/data
+          name: liferay-postgres
+      restartPolicy: Always
+      volumes:
+      - name: liferay-postgres
+        persistentVolumeClaim:
+          claimName: liferay-pvc-postgres
+---
+#Persistent Volume Claim for Postgres
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: liferay-pvc-postgres
+  namespace: liferay
+  labels:
+    app: liferay-postgres
+spec:
+  storageClassName: manual
+  accessModes:
+  - ReadWriteMany
+  resources:
+    requests:
+      storage: 6Gi
