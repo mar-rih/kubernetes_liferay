@@ -9,12 +9,12 @@ postgres:9.5
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
 ### Prerequisites
-*- Install EKS cluser in AWS.
-*- kubectl - kubernetes command tool.
-*- aws - command tool.
-*- ECR - docker registery of AWS
-*- build your flavor of liferay docker images and uploading it to your ECR registery
-*- after build you image and upload it to your docker registery, just change the image value in /lifferay_frontend_k8s/liferay_deployement.yml
+* Install EKS cluser in AWS.
+* kubectl - kubernetes command tool.
+* aws - command tool.
+* ECR - docker registery of AWS
+* build your flavor of liferay docker images and uploading it to your ECR registery
+* after build you image and upload it to your docker registery, just change the image value in /lifferay_frontend_k8s/liferay_deployement.yml
 
 ### Liferay flavor - docker file example
 ```
