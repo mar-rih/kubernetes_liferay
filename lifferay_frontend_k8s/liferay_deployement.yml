@@ -23,7 +23,7 @@ spec:
         - name: DB_TYPE
           value: POSTGRESQL
         - name: DB_ENDPOINT
-          value: jdbc:postgresql://postgres.liferay:5432/medad_client_10
+          value: jdbc:postgresql://postgres.liferay:5432/liferayclient10
         - name: DB_USER
           value: admin
         - name: DB_PASS
