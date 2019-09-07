@@ -1,0 +1,15 @@
+#Persistent Volume Claim for Postgres
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: liferay-pvc-postgres
+  namespace: liferay
+  labels:
+    app: liferay-postgres
+spec:
+  storageClassName: manual
+  accessModes:
+  - ReadWriteMany
+  resources:
+    requests:
+      storage: 6Gi

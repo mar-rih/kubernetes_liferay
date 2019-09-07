@@ -1,11 +1,14 @@
 {{- if .Values.ingress.enabled -}}
-{{- $fullName := include "endpoints.fullname" . -}}
+{{- $fullName := include "liferay.fullname" . -}}
+{{- $nspace := .Release.Namespace -}}
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: {{ $fullName }}
+  namespace: {{ $nspace }}  
   labels:
-{{ include "endpoints.labels" . | indent 4 }}
+    app: {{  .Values.clientname }}  
+{{ include "liferay.labels" . | indent 4 }}
   {{- with .Values.ingress.annotations }}
   annotations:
     {{- toYaml . | nindent 4 }}
@@ -23,14 +26,11 @@ spec:
 {{- end }}
   rules:
   {{- range .Values.ingress.hosts }}
-    - host: {{ .host | quote }}
+    - host: app.{{ $nspace }}.{{ .host }}
       http:
         paths:
-        {{- range .paths }}
-          - path: {{ . }}
-            backend:
-              serviceName: {{ $fullName }}
-              servicePort: http
-        {{- end }}
+        - backend:
+           serviceName: {{ $fullName }}
+           servicePort: 8080
   {{- end }}
 {{- end }}

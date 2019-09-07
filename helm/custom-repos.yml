@@ -1,0 +1,13 @@
+sync:
+  repos:
+    - name: stable
+      url: https://kubernetes-charts.storage.googleapis.com
+      schedule: "0 * * * *"
+      successfulJobsHistoryLimit: 1
+    - name: incubator
+      url: https://kubernetes-charts-incubator.storage.googleapis.com
+      schedule: "*/5 * * * *"
+    - name: monocular
+      url: https://helm.github.io/monocular
+    - name: liferay
+      url: http://cm.liferay.35.166.225.194.nip.io/
