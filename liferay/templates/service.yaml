@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "liferay.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: {{  .Values.clientname }}
+{{ include "liferay.labels" . | indent 4 }}
+spec:
+  ports:
+  - name: "8080"  
+    port: {{ .Values.service.port }}
+  selector:
+    app: {{ .Values.clientname }}

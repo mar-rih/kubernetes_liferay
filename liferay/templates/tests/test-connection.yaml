@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: "{{ include "endpoints.fullname" . }}-test-connection"
+  name: "{{ include "liferay.fullname" . }}-test-connection"
   labels:
-{{ include "endpoints.labels" . | indent 4 }}
+{{ include "liferay.labels" . | indent 4 }}
   annotations:
     "helm.sh/hook": test-success
 spec:
@@ -11,5 +11,5 @@ spec:
     - name: wget
       image: busybox
       command: ['wget']
-      args:  ['{{ include "endpoints.fullname" . }}:{{ .Values.service.port }}']
+      args:  ['{{ include "liferay.fullname" . }}:{{ .Values.service.port }}']
   restartPolicy: Never

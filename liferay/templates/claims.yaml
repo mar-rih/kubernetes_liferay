@@ -1,0 +1,56 @@
+#Persistent Volume Claim for Deploy Folder
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{  .Values.clientname }}-deploy-claim
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: {{  .Values.clientname }} 
+spec:
+  storageClassName: manual
+  accessModes:
+  - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Gi
+  selector:
+    matchLabels:
+      assign-to: {{  .Values.clientname }}-deploy
+---
+#Persistent Volume Claim for data folder
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{  .Values.clientname }}-data-claim
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: {{  .Values.clientname }} 
+spec:
+  storageClassName: manual
+  accessModes:
+  - ReadWriteMany
+  resources:
+    requests:
+      storage: 5Gi
+  selector:
+    matchLabels:
+      assign-to: {{  .Values.clientname }}-data
+---
+#Persistent Volume Claim for log folder
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{  .Values.clientname }}-logs-claim
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: {{  .Values.clientname }} 
+spec:
+  storageClassName: manual
+  accessModes:
+  - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Gi
+  selector:
+    matchLabels:
+      assign-to: {{  .Values.clientname }}-logs
