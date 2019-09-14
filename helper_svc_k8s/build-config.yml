@@ -1,0 +1,22 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  creationTimestamp: 2016-02-18T19:14:38Z
+  name: build-config
+  namespace: liferay-client10-build
+data:
+  build-config.properties: |
+    NAMESPACE = "liferay-client10-build"
+    NAMESPACE_PRO= "liferay-client10"
+    REPOBUILD = "https://github.com/mar-rih/docker-medad.git"
+    REPODEPLOY = "https://github.com/mar-rih/kubernetes_liferay.git"
+    IMAGE = "marrih/naseejmedad"
+    BRANCH_NAME = "client_10"
+    ADDRESS = "35.166.225.194.nip.io"
+    CM_ADDR = "cm.35.166.225.194.nip.io"
+    TAG = "${currentBuild.displayName}"
+    TAG_BETA = "${env.BRANCH_NAME}-${currentBuild.displayName}"
+    CHART_NAME = "medad-client10-test-${env.BUILD_NUMBER}"
+    CHART_NAME_PRO= "medad-client10"
+    CLIENT_NAME= "liferayclient10"
+    CHART_VER = "0.0.1"    
